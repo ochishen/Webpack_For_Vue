@@ -6,7 +6,7 @@
 
     }
 </script>
-<style>
+<style lang="scss" scoped>
 .hello{
     width:500px;
     height:500px;

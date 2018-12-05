@@ -4,7 +4,7 @@ const cleanWebpackPlugin = require('clean-webpack-plugin')
 const vueLoaderPlugin = require('vue-loader/lib/plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
-    mode:'development',
+    mode:'development',//生产模式的时候记得改成production!!!!
     entry:'./src/main.js',
     output:{
         filename:'bilibili.js',
@@ -16,7 +16,6 @@ module.exports = {
         port:8000,
         open:true
     },
-    watch:true,
     module:{
         rules:[
             {
@@ -33,12 +32,13 @@ module.exports = {
                 loader:'babel-loader'
             },
             {
-                test:/\.css$/,
+                test:/\.(sc|c)ss$/,
                 use:[
                  process.env.NODE_ENV !== 'production'
-                 ? 'vue-style-loader':
+                 ? 'vue-style-loader'://生产环境的时候要删掉(因为三元表达式无效！！！！)
                  miniCssExtractPlugin.loader,
-                   'css-loader'
+                   'css-loader',
+                   'sass-loader'
                 ]
             }
         ]
