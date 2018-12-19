@@ -4,7 +4,7 @@ const cleanWebpackPlugin = require('clean-webpack-plugin')
 const vueLoaderPlugin = require('vue-loader/lib/plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
-    mode:'development',//生产模式的时候记得改成production!!!!
+    mode:'development',
     entry:'./src/main.js',
     output:{
         filename:'bilibili.js',
@@ -20,10 +20,18 @@ module.exports = {
         rules:[
             {
                 test:/\.vue$/,
-                loader:'vue-loader'
+                use:[
+                    {
+                        loader:'vue-loader'
+                    }
+                ]
             },
             {
-                test:/\.(jpg|peng|gif)$/,
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                loader:'file-loader'
+            },
+            {
+                test:/\.(jpg|peng|svg|gif)$/,
                 loader:'file-loader'
             },
             {
@@ -32,14 +40,23 @@ module.exports = {
                 loader:'babel-loader'
             },
             {
-                test:/\.(sc|c)ss$/,
-                use:[
-                 process.env.NODE_ENV !== 'production'
-                 ? 'vue-style-loader'://生产环境的时候要删掉(因为三元表达式无效！！！！)
-                 miniCssExtractPlugin.loader,
-                   'css-loader',
-                   'sass-loader'
-                ]
+                test: /\.(sc|c|postc)ss$/,
+                use: [
+               //生产环境的时候要去掉(三元表达式无效！！！) 
+                   process.env.NODE_ENV !== 'production'
+                   ? 'vue-style-loader':            
+                   miniCssExtractPlugin.loader,
+                  'css-loader',
+                  'sass-loader',
+                  {
+                    loader: "postcss-loader",
+                    options:{
+                        plugins:[
+                            require('autoprefixer')('last 100 versions')
+                        ]
+                    }
+                   }
+                ],
             }
         ]
     },
