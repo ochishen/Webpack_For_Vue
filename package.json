@@ -1,6 +1,6 @@
 {
   "name": "webpack_for_vue_standard_form",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "vue基础模板",
   "main": "index.js",
   "scripts": {
