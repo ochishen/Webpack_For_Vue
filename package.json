@@ -4,9 +4,7 @@
   "description": "vue基础模板",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel ./src/main.js --out-file ./lib/bilibili.js",
-    "webpack": "webpack",
+    "build": "webpack",
     "dev": "webpack-dev-server --hot"
   },
   "keywords": [
